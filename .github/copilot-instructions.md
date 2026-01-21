@@ -90,7 +90,7 @@ Keep `gerar_eds_map()` core logic synchronized between both versions
 ## Language & Localization Notes
 - UI messages in Portuguese (pt-BR): "Arquivos CSV Selecionados", "Salvar Imagens em", etc.
 - Colorbar label hardcoded as "Intensidade"
-- README has mixed language (pt-BR conflict marker present in current version)
+- Project maintains separate README.md (Portuguese) and README_en.md (English)
 - When translating, preserve Portuguese style in messages
 
 ## Known Issues & Edge Cases

@@ -25,28 +25,27 @@ Para usar a interface gráfica (GUI) com suporte a arrastar-e-soltar no Windows/
 1. Instale as dependências:
    ```bash
    pip install -r requirements.txt
+   ```
 
+2. Execute o script:
+   ```bash
+   python EDSMapPlotter.py
+   ```
 
-### Execute o script:
+## Funcionalidades
 
-python EDSMapPlotter.py
+**Processamento em Lote**: Arraste dezenas de arquivos CSV e converta todos de uma vez.
 
-### Funcionalidades
+**Detecção Automática de Elementos**: O script lê o nome do arquivo (ex: Area1_Fe.csv) e nomeia o gráfico corretamente ("Fe").
 
-Processamento em Lote: Arraste dezenas de arquivos CSV e converta todos de uma vez.
+**Visualização**: Suporte a múltiplos mapas de cores (Viridis, Inferno, Blues, Reds, etc.).
 
-Detecção Automático de Elementos: O script lê o nome do arquivo (ex: Area1_Fe.csv) e nomeia o gráfico corretamente ("Fe").
+**Alta Qualidade**: Exportação fixa em 300 DPI.
 
-Visualização: Suporte a múltiplos mapas de cores (Viridis, Inferno, Blues, Reds, etc.).
-
-Alta Qualidade: Exportação fixa em 300 DPI.
-
-
-### Formato de Entrada
+## Formato de Entrada
 O software espera arquivos .csv contendo apenas a matriz de intensidades (sem cabeçalhos/headers de texto), que é o padrão de exportação de muitos softwares de microanálise.
 
-
-### Citação
+## Citação
 
 Se utilizar esta ferramenta em sua pesquisa, por favor cite:
 

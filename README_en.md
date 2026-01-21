@@ -1,7 +1,7 @@
 # EDSMapPlotter
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fdossi/EDSMapPlotter/blob/main/EDSMapPlotter_Colab.ipynb)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXX)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17741072.svg)](https://doi.org/10.5281/zenodo.17741072)
 ![License](https://img.shields.io/github/license/fdossi/EDSMapPlotter)
 ![Release](https://img.shields.io/github/v/release/fdossi/EDSMapPlotter)
 
