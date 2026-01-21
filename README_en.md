@@ -50,4 +50,4 @@ The software expects `.csv` files containing only the intensity matrix (without 
 
 If you use this tool in your research, please cite:
 
-Dossi, F. (2025). *EDSMapPlotter: A Python tool for EDS map visualization* (Version v0.2.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.17741072
+Dossi, F. (2025). *EDSMapPlotter: A Python tool for EDS map visualization* (Version v0.2.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.17741072

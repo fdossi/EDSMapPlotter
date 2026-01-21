@@ -1,11 +1,11 @@
 # EDSMapPlotter
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fdossi/EDSMapPlotter/blob/main/EDSMapPlotter_Colab.ipynb)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXX)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17741072.svg)](https://doi.org/10.5281/zenodo.17741072)
 ![License](https://img.shields.io/github/license/fdossi/EDSMapPlotter)
 ![Release](https://img.shields.io/github/v/release/fdossi/EDSMapPlotter)
 
-**EDSMapPlotter** é uma ferramenta open-source para automatizar a geração de mapas de calor (heatmaps) a partir de dados brutos de Espectroscopia de Energia Dispersiva (EDS/EDX).
+**EDSMapPlotter** é uma ferramenta open-source para automatizar a geração de mapas a partir de dados brutos (CSV) de Espectroscopia de Energia Dispersiva (EDS/EDX).
 
 O software converte matrizes numéricas (arquivos `.csv` exportados de microscópios SEM) em imagens de alta resolução (300 DPI) prontas para publicação científica.
 
@@ -50,4 +50,4 @@ O software espera arquivos .csv contendo apenas a matriz de intensidades (sem ca
 
 Se utilizar esta ferramenta em sua pesquisa, por favor cite:
 
-Dossi, F. (2025). *EDSMapPlotter: A Python tool for EDS map visualization* (Version v0.2.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.17741072
+Dossi, F. (2025). *EDSMapPlotter: A Python tool for EDS map visualization* (Version v0.2.1) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.17741072
