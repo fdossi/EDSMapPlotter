@@ -1,3 +1,7 @@
+[![PyPI version](https://badge.fury.io/py/edsmapplotter.svg)](https://badge.fury.io/py/edsmapplotter)
+[![PyPI license](https://img.shields.io/pypi/l/edsmapplotter.svg)](https://pypi.org/project/edsmapplotter/)
+[![PyPI python](https://img.shields.io/pypi/pyversions/edsmapplotter.svg)](https://pypi.org/project/edsmapplotter/)
+
 # EDSMapPlotter
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fdossi/EDSMapPlotter/blob/main/EDSMapPlotter_Colab.ipynb)
