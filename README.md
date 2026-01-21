@@ -35,7 +35,7 @@ python EDSMapPlotter.py
 
 Processamento em Lote: Arraste dezenas de arquivos CSV e converta todos de uma vez.
 
-Detecção Automática de Elementos: O script lê o nome do arquivo (ex: Area1_Fe.csv) e nomeia o gráfico corretamente ("Fe").
+Detecção Automático de Elementos: O script lê o nome do arquivo (ex: Area1_Fe.csv) e nomeia o gráfico corretamente ("Fe").
 
 Visualização: Suporte a múltiplos mapas de cores (Viridis, Inferno, Blues, Reds, etc.).
 
