@@ -19,7 +19,18 @@ Não requer instalação. Ideal para uso rápido ou em computadores sem Python c
 2. Faça upload dos seus CSVs.
 3. Baixe os mapas gerados automaticamente.
 
-### Opção B: Instalação Local (Desktop)
+### Opção B: Instalação via PyPI (Recomendado)
+Instale diretamente do Python Package Index:
+```bash
+pip install edsmapplotter
+```
+
+Execute o programa:
+```bash
+edsmapplotter
+```
+
+### Opção C: Instalação Local (Desenvolvedor)
 Para usar a interface gráfica (GUI) com suporte a arrastar-e-soltar no Windows/Linux/Mac:
 
 1. Instale as dependências:
