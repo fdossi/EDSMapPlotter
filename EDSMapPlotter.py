@@ -1,5 +1,6 @@
 import os
 import sys
+from pathlib import Path
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -30,21 +31,77 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
 
+
+def normalize_dir_path(raw: str):
+    if raw is None:
+        return None
+
+    s = str(raw).strip()
+    if not s:
+        return None
+
+    if (s.startswith('"') and s.endswith('"')) or (s.startswith("'") and s.endswith("'")):
+        s = s[1:-1].strip()
+
+    if s.startswith("{") and s.endswith("}"):
+        s = s[1:-1].strip()
+
+    if not s:
+        return None
+
+    p = Path(s).expanduser()
+    try:
+        return p.resolve()
+    except Exception:
+        return p.absolute()
+
+
+def sanitize_filename(name: str) -> str:
+    invalid = '<>:"/\\|?*'
+    for ch in invalid:
+        name = name.replace(ch, "_")
+    return name.strip(" .")
+
+
+def to_windows_long_path(path_obj: Path) -> str:
+    path_str = str(path_obj)
+    if os.name != "nt":
+        return path_str
+    if path_str.startswith("\\\\?\\"):
+        return path_str
+    abs_str = str(path_obj.resolve())
+    if len(abs_str) >= 240:
+        if abs_str.startswith("\\\\"):
+            return "\\\\?\\UNC\\" + abs_str.lstrip("\\")
+        return "\\\\?\\" + abs_str
+    return abs_str
+
 def gerar_eds_map(caminho_csv: str, pasta_saida: str, cmap_name: str = "viridis") -> bool:
     try:
+        csv_path = Path(str(caminho_csv).strip().strip("{}\"'"))
+        try:
+            csv_path = csv_path.resolve()
+        except Exception:
+            csv_path = csv_path.absolute()
+
+        out_dir = normalize_dir_path(pasta_saida)
+        if out_dir is None:
+            out_dir = csv_path.parent
+        out_dir.mkdir(parents=True, exist_ok=True)
+
         # Leitura robusta do CSV (sem cabeçalho)
-        df = pd.read_csv(caminho_csv, header=None)
+        df = pd.read_csv(str(csv_path), header=None)
         df_numeric = df.apply(pd.to_numeric, errors="coerce")
         data = df_numeric.to_numpy(dtype=float)
         
         # Validação de dados
         if data.size == 0 or np.all(np.isnan(data)):
-            print(f"Dados inválidos/vazios em: {caminho_csv}")
+            print(f"Dados inválidos/vazios em: {str(csv_path)}")
             return False
 
         # Extração inteligente do nome do elemento
-        nome = os.path.basename(caminho_csv)
-        n0 = os.path.splitext(nome)[0]
+        nome = csv_path.name
+        n0 = csv_path.stem
         parts = n0.split("_")
         
         if len(parts) > 1:
@@ -54,8 +111,13 @@ def gerar_eds_map(caminho_csv: str, pasta_saida: str, cmap_name: str = "viridis"
         else:
             elemento = n0
             out_name = f"edsmap_{elemento}.png"
-            
-        path_salvar = os.path.join(pasta_saida, out_name)
+
+        out_name = sanitize_filename(out_name)
+        if len(out_name) > 140:
+            stem = sanitize_filename(Path(out_name).stem)[:120]
+            out_name = f"{stem}.png"
+
+        path_salvar = out_dir / out_name
 
         # Plotagem
         fig, ax = plt.subplots(figsize=(8, 8), dpi=300)
@@ -70,7 +132,7 @@ def gerar_eds_map(caminho_csv: str, pasta_saida: str, cmap_name: str = "viridis"
         cbar.ax.tick_params(labelsize=18)
 
         plt.tight_layout()
-        fig.savefig(path_salvar, dpi=300, bbox_inches="tight")
+        fig.savefig(to_windows_long_path(path_salvar), dpi=300, bbox_inches="tight")
         plt.close(fig) # Libera memória
         return True
     
@@ -195,15 +257,16 @@ def main():
     def process():
         files = lista.get(0, tk.END)
         folder = out_entry.get().strip()
+        folder_path = normalize_dir_path(folder)
         
         if not files:
             messagebox.showwarning("Atenção", "Nenhum arquivo CSV foi selecionado.")
             return
-        if not folder:
+        if not folder_path:
             messagebox.showwarning("Atenção", "Por favor, selecione a pasta onde as imagens serão salvas.")
             return
-            
-        os.makedirs(folder, exist_ok=True)
+
+        folder_path.mkdir(parents=True, exist_ok=True)
         lbl_status.config(text="Processando... Isso pode levar alguns segundos.", fg="#e67e22")
         root.update() # Atualiza a tela imediatamente
         
@@ -211,13 +274,13 @@ def main():
         erros = 0
         
         for f in files:
-            ok = gerar_eds_map(f, folder, cmap_var.get())
+            ok = gerar_eds_map(f, str(folder_path), cmap_var.get())
             if ok: sucessos += 1
             else: erros += 1
         
         lbl_status.config(text=f"Finalizado: {sucessos} mapas gerados com sucesso.", fg="#28a745")
         
-        msg = f"Processamento concluído!\n\n✅ Sucessos: {sucessos}\n❌ Erros: {erros}\n\nImagens salvas em:\n{folder}"
+        msg = f"Processamento concluído!\n\n✅ Sucessos: {sucessos}\n❌ Erros: {erros}\n\nImagens salvas em:\n{str(folder_path)}"
         messagebox.showinfo("Relatório", msg)
 
     # Botão Gigante de Ação
